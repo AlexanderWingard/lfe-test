@@ -1,0 +1,22 @@
+%% -*- erlang -*-
+{application, mylfe,
+ [
+  {description, ""},
+
+  {vsn, "0.1.0"},
+
+  {modules, []},
+
+  {registered, []},
+
+  {applications,
+   [
+    kernel,
+    stdlib
+   ]},
+
+  {included_applications, []},
+
+  {env, []}
+ ]
+}.
