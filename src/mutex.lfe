@@ -3,7 +3,10 @@
 
 (defun start
   ()
-  (spawn_link (lambda () (free))))
+  (spawn_link
+   (lambda ()
+     (process_flag 'trap_exit 'true)
+     (free))))
 
 (defun wait
   (sem)
@@ -23,12 +26,15 @@
   ()
   (receive
     ((tuple ref client 'wait)
+     (link client)
      (! client ref)
      (busy))))
 
 (defun busy
   ()
   (receive
+    ((tuple 'EXIT from reason)
+     (free))
     ((tuple ref client 'signal)
      (! client ref)
      (free))))
