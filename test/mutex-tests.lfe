@@ -20,3 +20,14 @@
                             )))))
     (receive ('go 'ok))
     (is-equal 'ok (mutex:wait sem))))
+
+(deftest robust-2
+  ()
+  (let ((sem (mutex:start)))
+    (mutex:wait sem)
+    (let ((crasher (spawn (lambda () (mutex:wait sem)))))
+      (timer:sleep 20)
+      (exit crasher 'kill))
+    (mutex:signal sem)
+    ;; Why does this work?
+    (mutex:wait sem)))
