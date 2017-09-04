@@ -29,7 +29,7 @@
    (delete key tl (cons elem acc))))
 
 (defun read
-  ((key []) #('error 'not_found))
+  ((key []) #(error not-found))
   ((key (cons (tuple key1 value) tl)) (when (== key key1)) (tuple 'ok value))
   ((key (cons _ tl)) (read key tl)))
 

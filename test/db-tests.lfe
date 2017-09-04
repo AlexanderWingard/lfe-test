@@ -25,7 +25,7 @@
 (deftest db-read
   (let ((d  (db:write 'k 'v (db:new))))
     (is-equal #(ok v) (db:read 'k d)) ;???
-    (is-equal #('error 'not_found) (db:read 'x d))))
+    (is-equal #(error not-found) (db:read 'x d))))
 
 (deftest db-match
   (is-equal (list 'k1 'k) (db:match 'v (db:write 'k 'v (db:write 'k1 'v (db:new))))))
